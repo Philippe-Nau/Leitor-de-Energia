@@ -1,6 +1,8 @@
 import 'package:controle_fornecedores/routes/routes.dart';
+import 'package:controle_fornecedores/view/formNewMeter.dart';
 import 'package:controle_fornecedores/view/formNewRoom.dart';
 import 'package:controle_fornecedores/view/formNewStore.dart';
+import 'package:controle_fornecedores/view/meters.dart';
 import 'package:controle_fornecedores/view/reading_energy.dart';
 import 'package:controle_fornecedores/view/rooms.dart';
 import 'package:controle_fornecedores/view/store.dart';
@@ -27,6 +29,14 @@ abstract class AppPages {
     GetPage(
       name: Routes.FORMNEWROOM,
       page: () => FormNewRoom(),
+    ),
+    GetPage(
+      name: Routes.FORMNEWMETER,
+      page: () => FormNewMeter(),
+    ),
+    GetPage(
+      name: Routes.METERS,
+      page: () => Meters(),
     ),
   ];
 }
