@@ -1,3 +1,4 @@
+import 'package:controle_fornecedores/provider/meterProvider.dart';
 import 'package:controle_fornecedores/widgets/listViewMeters.dart';
 import 'package:controle_fornecedores/widgets/listViewMetersEmpty.dart';
 import 'package:controle_fornecedores/widgets/myButton.dart';
@@ -8,6 +9,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 class Meters extends StatelessWidget {
+  final MeterApiClient _meterApiClient = Get.put(MeterApiClient());
   @override
   Widget build(BuildContext context) {
     return Scaffold(

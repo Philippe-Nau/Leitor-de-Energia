@@ -1,12 +1,11 @@
-import 'package:controle_fornecedores/controller/formNewMeterController.dart';
+import 'package:controle_fornecedores/controller/meterController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
-class FormNewMeter extends GetView<FormNewMeterController> {
-  final FormNewMeterController _controllerNewRoom =
-      Get.put(FormNewMeterController());
+class FormNewMeter extends GetView<MeterController> {
+  final MeterController _controllerMeter = Get.put(MeterController());
   final GlobalKey<FormState> _formKey = GlobalKey();
 
   @override
@@ -17,9 +16,7 @@ class FormNewMeter extends GetView<FormNewMeterController> {
         actions: [
           IconButton(
             icon: FaIcon(FontAwesomeIcons.check),
-            onPressed: () {
-              if (_formKey.currentState.validate()) print('valido');
-            },
+            onPressed: () => _controllerMeter.sendMeter(_formKey),
           ),
         ],
       ),
@@ -29,10 +26,9 @@ class FormNewMeter extends GetView<FormNewMeterController> {
           child: Form(
             key: _formKey,
             child: TextFormField(
-              controller: _controllerNewRoom.meterController,
-              textInputAction: TextInputAction.next,
-              keyboardType: TextInputType.name,
-              textCapitalization: TextCapitalization.words,
+              controller: _controllerMeter.meterController,
+              textInputAction: TextInputAction.send,
+              keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 hintText: 'Código do Medidor',
               ),
