@@ -1,22 +1,13 @@
 class MeterModel {
-  List meters;
-
-  MeterModel({this.meters});
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.meters != null) {
-      data['meters'] = this.meters.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
-}
-
-class Meters {
-  String idMeter;
+  int idMeter;
   String codMeter;
 
-  Meters({this.idMeter, this.codMeter});
+  MeterModel({this.idMeter, this.codMeter});
+
+  MeterModel.fromJson(Map<String, dynamic> json) {
+    this.idMeter = json['idMeter'];
+    this.codMeter = json['codMeter'];
+  }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();

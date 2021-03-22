@@ -1,11 +1,12 @@
-import 'package:controle_fornecedores/controller/meterController.dart';
+import 'package:controle_fornecedores/controller/formNewMeterController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
-class FormNewMeter extends GetView<MeterController> {
-  final MeterController _controllerMeter = Get.put(MeterController());
+class FormNewMeter extends GetView<FormNewMeter> {
+  final FormNewMeterController _controllerNewMeter =
+      Get.put(FormNewMeterController());
   final GlobalKey<FormState> _formKey = GlobalKey();
 
   @override
@@ -16,7 +17,7 @@ class FormNewMeter extends GetView<MeterController> {
         actions: [
           IconButton(
             icon: FaIcon(FontAwesomeIcons.check),
-            onPressed: () => _controllerMeter.sendMeter(_formKey),
+            onPressed: () => _controllerNewMeter.sendMeter(_formKey),
           ),
         ],
       ),
@@ -26,7 +27,7 @@ class FormNewMeter extends GetView<MeterController> {
           child: Form(
             key: _formKey,
             child: TextFormField(
-              controller: _controllerMeter.meterController,
+              controller: _controllerNewMeter.meterController,
               textInputAction: TextInputAction.send,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
