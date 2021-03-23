@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 class CardListViewMeters extends StatelessWidget {
   final EdgeInsetsGeometry margin;
+  final String codMeter;
 
   CardListViewMeters({
     @required this.margin,
+    @required this.codMeter,
   });
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class CardListViewMeters extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '00000000',
+                '${this.codMeter}',
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   fontSize: 20,

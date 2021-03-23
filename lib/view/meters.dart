@@ -8,8 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
-class Meters extends StatelessWidget {
-  final MeterController _controller = Get.put(MeterController());
+class Meters extends GetView<MeterController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,11 +47,22 @@ class Meters extends StatelessWidget {
               ],
             ),
           ),
-          1 == 1 ? ListViewMeters() : ListViewMetersEmpty(),
+          controller.obx((state) {
+            return state.isNotEmpty
+                ? ListViewMeters(
+                    listMeter: state,
+                  )
+                : ListViewMetersEmpty();
+          }, onError: (error) {
+            return Center(
+              child:
+                  Text('Tivemos um problema. Entre em contato com o suporte'),
+            );
+          })
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Get.toNamed('/novo_medidor'),
+        onPressed: () => Get.toNamed('/medidores/novo_medidor'),
         child: FaIcon(FontAwesomeIcons.plus),
       ),
     );

@@ -1,7 +1,5 @@
-import 'package:controle_fornecedores/controller/meterController.dart';
 import 'package:controle_fornecedores/pages/pages.dart';
 import 'package:controle_fornecedores/routes/routes.dart';
-import 'package:controle_fornecedores/view/meters.dart';
 import 'package:controle_fornecedores/view/store.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

@@ -4,9 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
-class FormNewMeter extends GetView<FormNewMeter> {
-  final FormNewMeterController _controllerNewMeter =
-      Get.put(FormNewMeterController());
+class FormNewMeter extends GetView<Formnewmetercontroller> {
   final GlobalKey<FormState> _formKey = GlobalKey();
 
   @override
@@ -17,7 +15,8 @@ class FormNewMeter extends GetView<FormNewMeter> {
         actions: [
           IconButton(
             icon: FaIcon(FontAwesomeIcons.check),
-            onPressed: () => _controllerNewMeter.sendMeter(_formKey),
+            onPressed: () => controller.postMeter(
+                _formKey, controller.codMeterController.text),
           ),
         ],
       ),
@@ -27,7 +26,7 @@ class FormNewMeter extends GetView<FormNewMeter> {
           child: Form(
             key: _formKey,
             child: TextFormField(
-              controller: _controllerNewMeter.meterController,
+              controller: controller.codMeterController,
               textInputAction: TextInputAction.send,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
