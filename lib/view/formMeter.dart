@@ -1,22 +1,26 @@
-import 'package:controle_fornecedores/controller/formNewMeterController.dart';
+import 'package:controle_fornecedores/controller/meterController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
-class FormNewMeter extends GetView<Formnewmetercontroller> {
+class FormMeter extends GetView<MeterController> {
   final GlobalKey<FormState> _formKey = GlobalKey();
+  final dynamic dataArguments = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Novo Medidor'),
+        title: Text(dataArguments[0]),
         actions: [
           IconButton(
             icon: FaIcon(FontAwesomeIcons.check),
-            onPressed: () => controller.postMeter(
-                _formKey, controller.codMeterController.text),
+            onPressed: () => dataArguments[1]
+                ? controller.postMeter(
+                    _formKey, controller.codMeterController.text)
+                : controller.alterMeter(_formKey, dataArguments[3],
+                    controller.codMeterController.text),
           ),
         ],
       ),

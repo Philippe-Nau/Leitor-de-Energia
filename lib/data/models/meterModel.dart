@@ -2,23 +2,27 @@ import 'dart:convert';
 
 class MeterModel {
   int idMeter;
+  int numRoom;
+  String nameStore;
   String codMeter;
 
-  MeterModel({this.idMeter, this.codMeter});
+  MeterModel({this.idMeter, this.codMeter, this.nameStore, this.numRoom});
 
   Map<String, dynamic> toMap() {
     return {
       'idMeter': idMeter,
+      'numRoom': numRoom,
+      'nameStore': nameStore,
       'codMeter': codMeter,
     };
   }
 
   factory MeterModel.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return MeterModel(
-      idMeter: map['idMeter'] ?? '',
-      codMeter: map['codMeter'] ?? '',
+      idMeter: map['idMeter'],
+      numRoom: map['numRoom'],
+      nameStore: map['nameStore'],
+      codMeter: map['codMeter'],
     );
   }
 

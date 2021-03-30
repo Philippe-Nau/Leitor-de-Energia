@@ -1,3 +1,5 @@
+import 'package:controle_fornecedores/widgets/listViewEmpty.dart';
+import 'package:controle_fornecedores/widgets/listViewPages.dart';
 import 'package:controle_fornecedores/widgets/listViewStores.dart';
 import 'package:controle_fornecedores/widgets/listViewStoresEmpty.dart';
 import 'package:controle_fornecedores/widgets/myButton.dart';
@@ -46,7 +48,15 @@ class Stores extends StatelessWidget {
               ],
             ),
           ),
-          1 == 1 ? ListViewStores() : ListViewStoresEmpty(),
+          1 == 2
+              ? ListViewPages(
+                  children: [],
+                )
+              : ListViewEmpty(
+                  faIcon: FontAwesomeIcons.storeAlt,
+                  message: 'Não a nenhuma loja cadastrada',
+                  route: '/formulario_loja',
+                ),
         ],
       ),
       floatingActionButton: FloatingActionButton(

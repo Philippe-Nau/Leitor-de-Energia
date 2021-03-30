@@ -4,7 +4,7 @@ abstract class Routes {
   static const STORES = '/lojas';
   static const ROOMS = '/salas';
   static const METERS = '/medidores';
-  static const FORMNEWROOM = '/nova_sala';
-  static const FORMNEWUSTORE = '/nova_loja';
-  static const FORMNEWMETER = '/novo_medidor';
+  static const FORMROOM = '/formulario_sala';
+  static const FORMSTORE = '/nova_loja';
+  static const FORMMETER = '/formulario_medidor';
 }

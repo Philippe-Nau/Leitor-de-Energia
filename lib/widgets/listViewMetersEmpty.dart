@@ -18,7 +18,7 @@ class ListViewMetersEmpty extends StatelessWidget {
             ),
             SizedBox(height: 8),
             Text(
-              "Não a nenhuma medidor cadastrado.",
+              "Não a nenhum medidor para ser mostrado.",
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontWeight: FontWeight.w600,

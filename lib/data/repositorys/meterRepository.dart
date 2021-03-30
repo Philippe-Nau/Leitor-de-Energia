@@ -21,4 +21,42 @@ class MeterRepository implements MeterRepositoryinterface {
       rethrow;
     }
   }
+
+  Future<bool> postMeter(String _codMeter) async {
+    try {
+      var response = await http.post(Uri.parse('$_baseUrl/medidores'),
+          body: json.encode(
+            {'codMeter': _codMeter},
+          ),
+          headers: {'Content-Type': 'application/json'});
+      return response.statusCode == 201;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<bool> deleteMeter(int _idMeter) async {
+    try {
+      var response = await http.delete(
+        Uri.parse('$_baseUrl/medidores/$_idMeter'),
+      );
+      return response.statusCode == 201;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<bool> alterMeter(int _idMeter, String _codMeter) async {
+    try {
+      var response =
+          await http.patch(Uri.parse('$_baseUrl/medidores/$_idMeter'),
+              body: json.encode(
+                {'codMeter': _codMeter},
+              ),
+              headers: {'Content-Type': 'application/json'});
+      return response.statusCode == 201;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

@@ -5,10 +5,8 @@ import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
-class FormNewStore extends GetView<FormNewStoreController> {
+class FormStore extends GetView<FormNewStoreController> {
   final GeralController _controller = Get.put(GeralController());
-  final FormNewStoreController _controllerNewStore =
-      Get.put(FormNewStoreController());
   final GlobalKey<FormState> _formKey = GlobalKey();
 
   @override
@@ -32,7 +30,7 @@ class FormNewStore extends GetView<FormNewStoreController> {
           child: Column(
             children: [
               TextFormField(
-                controller: _controllerNewStore.storeNameController,
+                controller: controller.storeNameController,
                 textInputAction: TextInputAction.next,
                 keyboardType: TextInputType.name,
                 textCapitalization: TextCapitalization.words,

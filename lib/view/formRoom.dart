@@ -5,9 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
-class FormNewRoom extends GetView<FormNewRoomController> {
-  final FormNewRoomController _controllerNewRoom =
-      Get.put(FormNewRoomController());
+class FormRoom extends GetView<FormNewRoomController> {
   final GeralController _controller = Get.put(GeralController());
   final GlobalKey<FormState> _formKey = GlobalKey();
 
@@ -33,7 +31,7 @@ class FormNewRoom extends GetView<FormNewRoomController> {
             child: Column(
               children: [
                 TextFormField(
-                  controller: _controllerNewRoom.roomCodeController,
+                  controller: controller.roomCodeController,
                   textInputAction: TextInputAction.next,
                   keyboardType: TextInputType.name,
                   textCapitalization: TextCapitalization.words,

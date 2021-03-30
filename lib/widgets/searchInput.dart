@@ -19,6 +19,7 @@ class SearchInput extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: TextField(
+                    onChanged: (value) {},
                     style: TextStyle(color: Colors.white, fontSize: 18),
                     cursorColor: Colors.white,
                     textInputAction: TextInputAction.search,

@@ -18,6 +18,12 @@ class EnergyReading extends StatelessWidget {
         primaryColor: Color(0xFF006DB8),
         accentColor: Color(0xFF5580BF),
         buttonColor: Color(0xFF8AAEE4),
+        dialogTheme: DialogTheme(
+          contentTextStyle: TextStyle(
+            color: Colors.grey[700],
+            fontSize: 16,
+          ),
+        ),
         accentTextTheme: TextTheme(
           headline3: TextStyle(
             color: Colors.grey[700],

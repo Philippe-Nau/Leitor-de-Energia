@@ -1,19 +1,30 @@
-import 'package:controle_fornecedores/controller/geralController.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class CardListViewEnergyReading extends StatelessWidget {
+class CardListView extends StatelessWidget {
   final EdgeInsetsGeometry margin;
-  final GeralController _geralController = Get.put(GeralController());
+  final String title;
+  final String line1;
+  final String line2;
+  final bool buttonDelete;
+  final Function onPressedDelete;
+  final Function onTapCard;
 
-  CardListViewEnergyReading({
+  CardListView({
     @required this.margin,
+    @required this.title,
+    @required this.buttonDelete,
+    this.onTapCard,
+    this.line1,
+    this.line2,
+    this.onPressedDelete,
   });
+
   @override
   Widget build(BuildContext context) {
     return Card(
       margin: this.margin,
-      elevation: 3,
+      elevation: 8,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(5),
       ),
@@ -21,32 +32,32 @@ class CardListViewEnergyReading extends StatelessWidget {
         borderRadius: BorderRadius.circular(5),
         splashColor: Theme.of(context).accentColor.withOpacity(0.1),
         highlightColor: Theme.of(context).accentColor.withOpacity(0.1),
-        onTap: () {},
+        onTap: this.onTapCard,
         child: Container(
           padding: EdgeInsets.all(10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Expanded(
-                    child: Container(
-                      child: Text(
-                        '00000000',
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.grey[700],
-                        ),
-                      ),
+                  Text(
+                    '${this.title}',
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.grey[700],
                     ),
                   ),
-                  Text(
-                    '${_geralController.dateNow.day}/${_geralController.dateNow.month}/${_geralController.dateNow.year}',
-                  ),
+                  this.buttonDelete
+                      ? IconButton(
+                          color: Colors.red[700],
+                          icon: FaIcon(FontAwesomeIcons.trashAlt),
+                          onPressed: () => this.onPressedDelete(),
+                        )
+                      : SizedBox(),
                 ],
               ),
               Divider(
@@ -57,14 +68,14 @@ class CardListViewEnergyReading extends StatelessWidget {
                 height: 8,
               ),
               Text(
-                'Sala - 00',
+                '${this.line1}',
                 style: TextStyle(
                   fontSize: 16,
                   color: Colors.grey[700],
                 ),
               ),
               Text(
-                'Nome Loja',
+                '${this.line2}',
                 style: TextStyle(
                   fontSize: 16,
                   color: Colors.grey[700],

@@ -1,9 +1,8 @@
 import 'package:controle_fornecedores/data/bindings/metersBinding.dart';
-import 'package:controle_fornecedores/data/bindings/newMeterBinding.dart';
 import 'package:controle_fornecedores/routes/routes.dart';
-import 'package:controle_fornecedores/view/formNewMeter.dart';
-import 'package:controle_fornecedores/view/formNewRoom.dart';
-import 'package:controle_fornecedores/view/formNewStore.dart';
+import 'package:controle_fornecedores/view/formMeter.dart';
+import 'package:controle_fornecedores/view/formStore.dart';
+import 'package:controle_fornecedores/view/formRoom.dart';
 import 'package:controle_fornecedores/view/meters.dart';
 import 'package:controle_fornecedores/view/reading_energy.dart';
 import 'package:controle_fornecedores/view/rooms.dart';
@@ -21,16 +20,16 @@ abstract class AppPages {
       page: () => Stores(),
     ),
     GetPage(
-      name: Routes.FORMNEWUSTORE,
-      page: () => FormNewStore(),
+      name: Routes.FORMSTORE,
+      page: () => FormStore(),
     ),
     GetPage(
       name: Routes.ROOMS,
       page: () => Rooms(),
     ),
     GetPage(
-      name: Routes.FORMNEWROOM,
-      page: () => FormNewRoom(),
+      name: Routes.FORMROOM,
+      page: () => FormRoom(),
     ),
     GetPage(
       name: Routes.METERS,
@@ -38,9 +37,8 @@ abstract class AppPages {
       binding: Metersbinding(),
       children: [
         GetPage(
-          name: Routes.FORMNEWMETER,
-          page: () => FormNewMeter(),
-          binding: Newmeterbinding(),
+          name: Routes.FORMMETER,
+          page: () => FormMeter(),
         ),
       ],
     ),
