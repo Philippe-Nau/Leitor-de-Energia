@@ -1,19 +1,23 @@
-import 'package:controle_fornecedores/controller/formNewRoomController.dart';
-import 'package:controle_fornecedores/controller/geralController.dart';
+import 'package:controle_fornecedores/controller/generalController.dart';
+import 'package:controle_fornecedores/controller/meterController.dart';
+import 'package:controle_fornecedores/controller/roomController.dart';
+import 'package:controle_fornecedores/data/models/freeMeterModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
-class FormRoom extends GetView<FormNewRoomController> {
+class FormRoom extends GetView<RoomController> {
   final GeralController _controller = Get.put(GeralController());
+  final MeterController _controllerMeter = Get.put(MeterController(Get.find()));
   final GlobalKey<FormState> _formKey = GlobalKey();
+  final dynamic dataArguments = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Nova Sala'),
+        title: Text(dataArguments[0]),
         actions: [
           IconButton(
             icon: FaIcon(FontAwesomeIcons.check),
@@ -32,11 +36,11 @@ class FormRoom extends GetView<FormNewRoomController> {
               children: [
                 TextFormField(
                   controller: controller.roomCodeController,
+                  autofocus: true,
                   textInputAction: TextInputAction.next,
-                  keyboardType: TextInputType.name,
-                  textCapitalization: TextCapitalization.words,
+                  keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                    hintText: 'Código da Sala',
+                    hintText: 'Número da Sala',
                   ),
                   validator: (validator) {
                     if (validator.trim().isEmpty)
@@ -46,22 +50,25 @@ class FormRoom extends GetView<FormNewRoomController> {
                   },
                 ),
                 SizedBox(height: 10),
-                DropdownButtonFormField(
-                  onChanged: (value) => _controller.selectMeter(value),
-                  hint: Text('Selecione um medidor disponível'),
-                  validator: (value) {
-                    if (value == null)
-                      return 'Este campo é obrigatório';
-                    else
-                      return null;
-                  },
-                  items: _controller.meters
-                      .map((value) => DropdownMenuItem(
-                            child: Text(value),
-                            value: value,
-                          ))
-                      .toList(),
-                ),
+                _controllerMeter.obx((state) {
+                  List<FreeMeterModel> _listFreeMeters = state;
+                  return DropdownButtonFormField(
+                    onChanged: (value) => _controller.selectMeter(value),
+                    hint: Text('Selecione um medidor disponível'),
+                    validator: (value) {
+                      if (value == null)
+                        return 'Este campo é obrigatório';
+                      else
+                        return null;
+                    },
+                    items: _listFreeMeters
+                        .map((e) => DropdownMenuItem(
+                              child: Text(e.codMeter),
+                              value: e,
+                            ))
+                        .toList(),
+                  );
+                }),
               ],
             ),
           ),

@@ -1,8 +1,7 @@
 import 'package:controle_fornecedores/controller/meterController.dart';
 import 'package:controle_fornecedores/data/models/meterModel.dart';
 import 'package:controle_fornecedores/widgets/cardListView.dart';
-import 'package:controle_fornecedores/widgets/listViewMeters.dart';
-import 'package:controle_fornecedores/widgets/listViewMetersEmpty.dart';
+import 'package:controle_fornecedores/widgets/listViewEmpty.dart';
 import 'package:controle_fornecedores/widgets/listViewPages.dart';
 import 'package:controle_fornecedores/widgets/myAlertDialog.dart';
 import 'package:controle_fornecedores/widgets/myButton.dart';
@@ -32,9 +31,7 @@ class Meters extends GetView<MeterController> {
             color: Theme.of(context).primaryColor,
             child: Row(
               children: [
-                controller.obx(
-                  (state) => SearchInput(),
-                ),
+                SearchInput(),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: MyButton(
@@ -55,7 +52,7 @@ class Meters extends GetView<MeterController> {
           ),
           controller.obx((state) {
             List<MeterModel> listMeters = state;
-            return state.isNotEmpty
+            return listMeters.isNotEmpty
                 ? ListViewPages(
                     children: listMeters.map((e) {
                       return CardListView(
@@ -87,10 +84,13 @@ class Meters extends GetView<MeterController> {
                       );
                     }).toList(),
                   )
-                // ? ListViewMeters(
-                //     listMeter: state,
-                //   )
-                : ListViewMetersEmpty();
+                : ListViewEmpty(
+                    faIcon: FontAwesomeIcons.tachometerAlt,
+                    message: 'Não a nenhum medidor cadastrado',
+                    route: () => Get.toNamed('/medidores/formulario_medidor',
+                            arguments: ['Novo Medidor', true])
+                        .then((value) => controller.codMeterController.clear()),
+                  );
           }, onError: (error) {
             return Text('Tivemos um problema. Entre em contato com o suporte');
           })

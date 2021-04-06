@@ -1,4 +1,4 @@
-import 'package:controle_fornecedores/controller/geralController.dart';
+import 'package:controle_fornecedores/controller/generalController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';

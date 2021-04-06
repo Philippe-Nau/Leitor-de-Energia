@@ -1,19 +1,20 @@
-import 'package:controle_fornecedores/controller/formNewStoreController.dart';
-import 'package:controle_fornecedores/controller/geralController.dart';
+import 'package:controle_fornecedores/controller/generalController.dart';
+import 'package:controle_fornecedores/controller/storeController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
-class FormStore extends GetView<FormNewStoreController> {
+class FormStore extends GetView<StoreController> {
   final GeralController _controller = Get.put(GeralController());
+  final dynamic dataArguments = Get.arguments;
   final GlobalKey<FormState> _formKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Nova Loja'),
+        title: Text(dataArguments[0]),
         actions: [
           IconButton(
             icon: FaIcon(FontAwesomeIcons.check),

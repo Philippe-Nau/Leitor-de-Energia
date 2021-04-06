@@ -20,7 +20,17 @@ class MeterController extends GetxController with StateMixin {
       final data = await _meterRepository.findAllMeters();
       change(data, status: RxStatus.success());
     } catch (e) {
-      change([], status: RxStatus.error('Erro ao buscar medidor.'));
+      change([], status: RxStatus.error('Erro ao buscar medidores.'));
+    }
+  }
+
+  Future<void> findFreeMeters() async {
+    change([], status: RxStatus.loading());
+    try {
+      final data = await _meterRepository.findFreeMeters();
+      change(data, status: RxStatus.success());
+    } catch (e) {
+      change([], status: RxStatus.error('Erro ao buscar medidores.'));
     }
   }
 

@@ -1,4 +1,6 @@
 import 'package:controle_fornecedores/data/bindings/metersBinding.dart';
+import 'package:controle_fornecedores/data/bindings/roomsBinding.dart';
+import 'package:controle_fornecedores/data/bindings/storeBinding.dart';
 import 'package:controle_fornecedores/routes/routes.dart';
 import 'package:controle_fornecedores/view/formMeter.dart';
 import 'package:controle_fornecedores/view/formStore.dart';
@@ -18,18 +20,24 @@ abstract class AppPages {
     GetPage(
       name: Routes.STORES,
       page: () => Stores(),
-    ),
-    GetPage(
-      name: Routes.FORMSTORE,
-      page: () => FormStore(),
+      binding: Storesbinding(),
+      children: [
+        GetPage(
+          name: Routes.FORMSTORE,
+          page: () => FormStore(),
+        ),
+      ],
     ),
     GetPage(
       name: Routes.ROOMS,
       page: () => Rooms(),
-    ),
-    GetPage(
-      name: Routes.FORMROOM,
-      page: () => FormRoom(),
+      bindings: [Roomsbinding(), Metersbinding()],
+      children: [
+        GetPage(
+          name: Routes.FORMROOM,
+          page: () => FormRoom(),
+        ),
+      ],
     ),
     GetPage(
       name: Routes.METERS,

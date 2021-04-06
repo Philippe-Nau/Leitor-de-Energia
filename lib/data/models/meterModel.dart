@@ -20,9 +20,9 @@ class MeterModel {
   factory MeterModel.fromMap(Map<String, dynamic> map) {
     return MeterModel(
       idMeter: map['idMeter'],
-      numRoom: map['numRoom'],
-      nameStore: map['nameStore'],
       codMeter: map['codMeter'],
+      numRoom: map['numRoom'] ?? 0,
+      nameStore: map['nameStore'] ?? 'Livre',
     );
   }
 

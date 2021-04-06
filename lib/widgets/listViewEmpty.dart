@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
 
 class ListViewEmpty extends StatelessWidget {
-  final String route;
+  final Function route;
   final String message;
   final IconData faIcon;
   const ListViewEmpty({
@@ -15,7 +14,7 @@ class ListViewEmpty extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: InkWell(
-        onTap: () => Get.toNamed(this.route),
+        onTap: this.route,
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: 10),
           child: Column(

@@ -1,3 +1,4 @@
+import 'package:controle_fornecedores/data/bindings/storeBinding.dart';
 import 'package:controle_fornecedores/pages/pages.dart';
 import 'package:controle_fornecedores/routes/routes.dart';
 import 'package:controle_fornecedores/view/store.dart';
@@ -37,6 +38,7 @@ class EnergyReading extends StatelessWidget {
       title: 'Leitura de Energia Elétrica',
       initialRoute: Routes.STORES,
       getPages: AppPages.pages,
+      initialBinding: Storesbinding(),
       home: Stores(),
     );
   }
