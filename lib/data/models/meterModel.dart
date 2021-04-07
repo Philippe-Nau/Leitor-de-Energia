@@ -2,7 +2,7 @@ import 'dart:convert';
 
 class MeterModel {
   int idMeter;
-  int numRoom;
+  String numRoom;
   String nameStore;
   String codMeter;
 
@@ -11,9 +11,9 @@ class MeterModel {
   Map<String, dynamic> toMap() {
     return {
       'idMeter': idMeter,
+      'codMeter': codMeter,
       'numRoom': numRoom,
       'nameStore': nameStore,
-      'codMeter': codMeter,
     };
   }
 
@@ -21,7 +21,7 @@ class MeterModel {
     return MeterModel(
       idMeter: map['idMeter'],
       codMeter: map['codMeter'],
-      numRoom: map['numRoom'] ?? 0,
+      numRoom: map['numRoom'] ?? '0',
       nameStore: map['nameStore'] ?? 'Livre',
     );
   }

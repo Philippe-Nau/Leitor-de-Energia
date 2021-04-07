@@ -1,6 +1,6 @@
 class RoomModel {
   final int idRoom;
-  final int numRoom;
+  final String numRoom;
   final String codMeter;
   final String nameStore;
 

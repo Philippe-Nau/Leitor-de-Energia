@@ -1,15 +1,10 @@
-import 'package:controle_fornecedores/controller/generalController.dart';
-import 'package:controle_fornecedores/controller/meterController.dart';
 import 'package:controle_fornecedores/controller/roomController.dart';
-import 'package:controle_fornecedores/data/models/freeMeterModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 class FormRoom extends GetView<RoomController> {
-  final GeralController _controller = Get.put(GeralController());
-  final MeterController _controllerMeter = Get.put(MeterController(Get.find()));
   final GlobalKey<FormState> _formKey = GlobalKey();
   final dynamic dataArguments = Get.arguments;
 
@@ -20,11 +15,16 @@ class FormRoom extends GetView<RoomController> {
         title: Text(dataArguments[0]),
         actions: [
           IconButton(
-            icon: FaIcon(FontAwesomeIcons.check),
-            onPressed: () {
-              if (_formKey.currentState.validate()) print('valido');
-            },
-          ),
+              icon: FaIcon(FontAwesomeIcons.check),
+              onPressed: () => dataArguments[1]
+                  ? controller.postRoom(
+                      _formKey,
+                      controller.roomCodeController.text,
+                      controller.selectedMeter.value)
+                  : null
+              // : controller.alterMeter(_formKey, dataArguments[3],
+              //     controller.codMeterController.text),
+              ),
         ],
       ),
       body: Container(
@@ -50,25 +50,22 @@ class FormRoom extends GetView<RoomController> {
                   },
                 ),
                 SizedBox(height: 10),
-                _controllerMeter.obx((state) {
-                  List<FreeMeterModel> _listFreeMeters = state;
-                  return DropdownButtonFormField(
-                    onChanged: (value) => _controller.selectMeter(value),
-                    hint: Text('Selecione um medidor disponível'),
-                    validator: (value) {
-                      if (value == null)
-                        return 'Este campo é obrigatório';
-                      else
-                        return null;
-                    },
-                    items: _listFreeMeters
-                        .map((e) => DropdownMenuItem(
-                              child: Text(e.codMeter),
-                              value: e,
-                            ))
-                        .toList(),
-                  );
-                }),
+                DropdownButtonFormField(
+                  onChanged: (value) => controller.selectMeter(value.idMeter),
+                  hint: Text('Selecione um medidor disponível'),
+                  validator: (value) {
+                    if (value == null)
+                      return 'Este campo é obrigatório';
+                    else
+                      return null;
+                  },
+                  items: controller.freeMeterModel
+                      .map((e) => DropdownMenuItem(
+                            child: Text(e.codMeter),
+                            value: e,
+                          ))
+                      .toList(),
+                ),
               ],
             ),
           ),

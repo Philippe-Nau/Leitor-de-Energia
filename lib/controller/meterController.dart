@@ -24,16 +24,6 @@ class MeterController extends GetxController with StateMixin {
     }
   }
 
-  Future<void> findFreeMeters() async {
-    change([], status: RxStatus.loading());
-    try {
-      final data = await _meterRepository.findFreeMeters();
-      change(data, status: RxStatus.success());
-    } catch (e) {
-      change([], status: RxStatus.error('Erro ao buscar medidores.'));
-    }
-  }
-
   postMeter(GlobalKey<FormState> _key, String _codMeter) async {
     if (_key.currentState.validate()) {
       final resp = await _meterRepository.postMeter(_codMeter);

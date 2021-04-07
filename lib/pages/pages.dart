@@ -31,10 +31,11 @@ abstract class AppPages {
     GetPage(
       name: Routes.ROOMS,
       page: () => Rooms(),
-      bindings: [Roomsbinding(), Metersbinding()],
+      binding: Roomsbinding(),
       children: [
         GetPage(
           name: Routes.FORMROOM,
+          binding: Roomsbinding(),
           page: () => FormRoom(),
         ),
       ],
@@ -47,6 +48,7 @@ abstract class AppPages {
         GetPage(
           name: Routes.FORMMETER,
           page: () => FormMeter(),
+          binding: Metersbinding(),
         ),
       ],
     ),

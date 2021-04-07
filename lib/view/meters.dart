@@ -14,6 +14,7 @@ import 'package:get/get.dart';
 class Meters extends GetView<MeterController> {
   @override
   Widget build(BuildContext context) {
+    controller.findMeters();
     return Scaffold(
       backgroundColor: Color(0xFFF5F5F5),
       appBar: AppBar(

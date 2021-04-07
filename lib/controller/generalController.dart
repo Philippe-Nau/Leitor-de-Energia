@@ -8,10 +8,6 @@ class GeralController extends GetxController {
   final List<String> _rooms = ['Sala-01', 'Sala-02', 'Sala-03'];
   List<String> get rooms => _rooms;
 
-  final meterSelected = ''.obs;
-  final List<String> _meters = ['3605031', '4982776', '3663607'];
-  List<String> get meters => _meters;
-
   @override
   void onInit() {
     selectMonth();
@@ -61,9 +57,5 @@ class GeralController extends GetxController {
 
   selectRoom(value) {
     roomSelected.value = value;
-  }
-
-  selectMeter(value) {
-    meterSelected.value = value;
   }
 }

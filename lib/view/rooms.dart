@@ -1,4 +1,3 @@
-import 'package:controle_fornecedores/controller/meterController.dart';
 import 'package:controle_fornecedores/controller/roomController.dart';
 import 'package:controle_fornecedores/data/models/roomModel.dart';
 import 'package:controle_fornecedores/widgets/cardListView.dart';
@@ -12,8 +11,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 class Rooms extends GetView<RoomController> {
-  final MeterController _controllerMeter = Get.put(MeterController(Get.find()));
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,38 +60,32 @@ class Rooms extends GetView<RoomController> {
                         line1: e.nameStore,
                         line2: e.codMeter,
                         buttonDelete: true,
-                        onTapCard: () => _controllerMeter.findFreeMeters().then(
-                              (value) => Get.toNamed('/salas/formulario_sala',
-                                  arguments: [
-                                    'Nova Sala',
-                                    true,
-                                    controller.roomCodeController.text =
-                                        e.numRoom.toString()
-                                  ]).then((value) =>
-                                  controller.roomCodeController.clear()),
-                            ),
+                        onTapCard: () => Get.toNamed('/salas/formulario_sala',
+                            arguments: [
+                              'Nova Sala',
+                              true,
+                              controller.roomCodeController.text =
+                                  e.numRoom.toString()
+                            ]).then(
+                            (value) => controller.roomCodeController.clear()),
                       );
                     }).toList(),
                   )
                 : ListViewEmpty(
                     faIcon: FontAwesomeIcons.storeAlt,
                     message: 'Não a nenhuma sala cadastrada',
-                    route: () => _controllerMeter.findFreeMeters().then(
-                          (value) => Get.toNamed('/salas/formulario_sala',
-                                  arguments: ['Nova Sala', true])
-                              .then((value) =>
-                                  controller.roomCodeController.clear()),
-                        ),
+                    route: () => Get.toNamed('/salas/formulario_sala',
+                            arguments: ['Nova Sala', true])
+                        .then((value) => controller.roomCodeController.clear()),
                   );
           }),
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => _controllerMeter.findFreeMeters().then(
-              (value) => Get.toNamed('/salas/formulario_sala',
-                      arguments: ['Nova Sala', true])
-                  .then((value) => controller.roomCodeController.clear()),
-            ),
+        onPressed: () => controller.findFreeMeters().then((value) =>
+            Get.toNamed('/salas/formulario_sala',
+                    arguments: ['Nova Sala', true])
+                .then((value) => controller.roomCodeController.clear())),
         child: FaIcon(FontAwesomeIcons.plus),
       ),
     );

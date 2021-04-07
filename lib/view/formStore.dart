@@ -106,7 +106,7 @@ class FormStore extends GetView<StoreController> {
                 decoration: InputDecoration(
                   labelText: 'Medidor',
                 ),
-                initialValue: _controller.meters[0],
+                initialValue: '11111',
               ),
               Expanded(
                 child: ListView.builder(
