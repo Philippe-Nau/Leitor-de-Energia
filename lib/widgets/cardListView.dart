@@ -24,7 +24,7 @@ class CardListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       margin: this.margin,
-      elevation: 8,
+      elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(5),
       ),
@@ -34,38 +34,26 @@ class CardListView extends StatelessWidget {
         highlightColor: Theme.of(context).accentColor.withOpacity(0.1),
         onTap: this.onTapCard,
         child: Container(
+          height: 70,
           padding: EdgeInsets.all(10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    '${this.title}',
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.grey[700],
-                    ),
-                  ),
-                  this.buttonDelete
-                      ? IconButton(
-                          color: Colors.red[700],
-                          icon: FaIcon(FontAwesomeIcons.trashAlt),
-                          onPressed: () => this.onPressedDelete(),
-                        )
-                      : SizedBox(),
-                ],
+              Text(
+                '${this.title}',
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.grey[700],
+                ),
               ),
-              Divider(
+              VerticalDivider(
                 color: Theme.of(context).accentColor,
-                indent: 0,
-                endIndent: 0,
-                thickness: 1,
-                height: 8,
+                indent: 10,
+                endIndent: 10,
+                thickness: 2,
+                width: 0.5,
               ),
               Text(
                 '${this.line1}',
@@ -81,8 +69,63 @@ class CardListView extends StatelessWidget {
                   color: Colors.grey[700],
                 ),
               ),
+              this.buttonDelete
+                  ? IconButton(
+                      color: Colors.red[700],
+                      icon: FaIcon(FontAwesomeIcons.trashAlt),
+                      onPressed: () => this.onPressedDelete(),
+                    )
+                  : SizedBox(),
             ],
           ),
+          // child: Column(
+          //   crossAxisAlignment: CrossAxisAlignment.start,
+          //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //   children: [
+          //     Row(
+          //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //       children: [
+          //         Text(
+          //           '${this.title}',
+          //           overflow: TextOverflow.ellipsis,
+          //           style: TextStyle(
+          //             fontSize: 20,
+          //             fontWeight: FontWeight.w600,
+          //             color: Colors.grey[700],
+          //           ),
+          //         ),
+          //         this.buttonDelete
+          //             ? IconButton(
+          //                 color: Colors.red[700],
+          //                 icon: FaIcon(FontAwesomeIcons.trashAlt),
+          //                 onPressed: () => this.onPressedDelete(),
+          //               )
+          //             : SizedBox(),
+          //       ],
+          //     ),
+          //     Divider(
+          //       color: Theme.of(context).accentColor,
+          //       indent: 0,
+          //       endIndent: 0,
+          //       thickness: 1,
+          //       height: 8,
+          //     ),
+          //     Text(
+          //       '${this.line1}',
+          //       style: TextStyle(
+          //         fontSize: 16,
+          //         color: Colors.grey[700],
+          //       ),
+          //     ),
+          //     Text(
+          //       '${this.line2}',
+          //       style: TextStyle(
+          //         fontSize: 16,
+          //         color: Colors.grey[700],
+          //       ),
+          //     ),
+          //   ],
+          // ),
         ),
       ),
     );

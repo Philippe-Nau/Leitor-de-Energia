@@ -14,6 +14,12 @@ class MeterController extends GetxController with StateMixin {
     findMeters();
   }
 
+  onClose() {
+    super.onClose();
+    codMeterController.dispose();
+    scrollController.dispose();
+  }
+
   Future<void> findMeters() async {
     change([], status: RxStatus.loading());
     try {

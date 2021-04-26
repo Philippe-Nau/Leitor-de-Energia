@@ -15,16 +15,22 @@ class FormRoom extends GetView<RoomController> {
         title: Text(dataArguments[0]),
         actions: [
           IconButton(
-              icon: FaIcon(FontAwesomeIcons.check),
-              onPressed: () => dataArguments[1]
-                  ? controller.postRoom(
-                      _formKey,
-                      controller.roomCodeController.text,
-                      controller.selectedMeter.value)
-                  : null
-              // : controller.alterMeter(_formKey, dataArguments[3],
-              //     controller.codMeterController.text),
-              ),
+            icon: FaIcon(FontAwesomeIcons.check),
+            onPressed: () => dataArguments[1]
+                ? controller.postRoom(
+                    _formKey,
+                    controller.roomCodeController.text,
+                    controller.selectedMeter.value,
+                  )
+                : controller.alterRoom(
+                    _formKey,
+                    dataArguments[2],
+                    controller.selectedMeter.value == 0
+                        ? dataArguments[3]
+                        : controller.selectedMeter.value,
+                    controller.roomCodeController.text,
+                  ),
+          ),
         ],
       ),
       body: Container(
@@ -33,6 +39,7 @@ class FormRoom extends GetView<RoomController> {
           child: Form(
             key: _formKey,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TextFormField(
                   controller: controller.roomCodeController,
@@ -49,12 +56,23 @@ class FormRoom extends GetView<RoomController> {
                       return null;
                   },
                 ),
+                SizedBox(height: 5),
+                !dataArguments[1]
+                    ? Text(
+                        'Medidor Atual: ${dataArguments[4]}',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.blue[900],
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    : SizedBox(),
                 SizedBox(height: 10),
                 DropdownButtonFormField(
                   onChanged: (value) => controller.selectMeter(value.idMeter),
                   hint: Text('Selecione um medidor disponível'),
                   validator: (value) {
-                    if (value == null)
+                    if (value == null && dataArguments[1])
                       return 'Este campo é obrigatório';
                     else
                       return null;

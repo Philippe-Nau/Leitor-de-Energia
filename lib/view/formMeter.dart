@@ -12,7 +12,7 @@ class FormMeter extends GetView<MeterController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(dataArguments[0]),
+        title: Text(dataArguments[0] ?? ''),
         actions: [
           IconButton(
             icon: FaIcon(FontAwesomeIcons.check),

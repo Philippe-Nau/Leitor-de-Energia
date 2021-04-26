@@ -65,29 +65,35 @@ class Stores extends GetView<StoreController> {
                           arguments: [
                             'Editar Loja',
                             false,
+                            e.numRoom,
+                            e.codMeter,
                             controller.storeNameController.text = e.nameStore,
                           ],
-                        ).then(
-                            (value) => controller.storeNameController.clear()),
+                        ).then((value) {
+                          controller.storeNameController.clear();
+                          controller.codMeterController.clear();
+                        }),
                       );
                     }).toList(),
                   )
                 : ListViewEmpty(
                     faIcon: FontAwesomeIcons.storeAlt,
                     message: 'Não a nenhuma loja cadastrada',
-                    route: () =>
-                        Get.toNamed('/lojas/formulario_loja', arguments: [
-                      'Nova Loja',
-                      true
-                    ]).then((value) => controller.storeNameController.clear()),
+                    route: () => Get.toNamed('/lojas/formulario_loja',
+                        arguments: ['Nova Loja', true]).then((value) {
+                      controller.storeNameController.clear();
+                      controller.codMeterController.clear();
+                    }),
                   );
           }),
         ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Get.toNamed('/lojas/formulario_loja',
-                arguments: ['Nova Loja', true])
-            .then((value) => controller.storeNameController.clear()),
+            arguments: ['Nova Loja', true]).then((value) {
+          controller.storeNameController.clear();
+          controller.codMeterController.clear();
+        }),
         child: FaIcon(FontAwesomeIcons.plus),
       ),
     );

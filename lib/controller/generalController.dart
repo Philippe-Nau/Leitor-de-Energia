@@ -4,10 +4,6 @@ class GeralController extends GetxController {
   final DateTime dateNow = DateTime.now();
   final RxString month = ''.obs;
 
-  final roomSelected = ''.obs;
-  final List<String> _rooms = ['Sala-01', 'Sala-02', 'Sala-03'];
-  List<String> get rooms => _rooms;
-
   @override
   void onInit() {
     selectMonth();
@@ -53,9 +49,5 @@ class GeralController extends GetxController {
         month.value = 'Dezembro';
         break;
     }
-  }
-
-  selectRoom(value) {
-    roomSelected.value = value;
   }
 }

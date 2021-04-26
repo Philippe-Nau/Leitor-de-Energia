@@ -3,6 +3,7 @@ import 'package:controle_fornecedores/data/models/roomModel.dart';
 import 'package:controle_fornecedores/widgets/cardListView.dart';
 import 'package:controle_fornecedores/widgets/listViewEmpty.dart';
 import 'package:controle_fornecedores/widgets/listViewPages.dart';
+import 'package:controle_fornecedores/widgets/myAlertDialog.dart';
 import 'package:controle_fornecedores/widgets/myButton.dart';
 import 'package:controle_fornecedores/widgets/myDrawer.dart';
 import 'package:controle_fornecedores/widgets/searchInput.dart';
@@ -60,24 +61,43 @@ class Rooms extends GetView<RoomController> {
                         line1: e.nameStore,
                         line2: e.codMeter,
                         buttonDelete: true,
-                        onTapCard: () => Get.toNamed('/salas/formulario_sala',
-                            arguments: [
-                              'Nova Sala',
-                              true,
-                              controller.roomCodeController.text =
-                                  e.numRoom.toString()
-                            ]).then(
-                            (value) => controller.roomCodeController.clear()),
+                        onPressedDelete: () => showDialog(
+                          context: context,
+                          builder: (ctx) => MyAlertDialog(
+                            title: 'Excluir Sala',
+                            contentText:
+                                'Tem certeza que deseja excluir esta sala?',
+                            cancel: () => Get.back(),
+                            confirm: () => controller.deleteRoom(e.idRoom),
+                          ),
+                        ),
+                        onTapCard: () => controller.findFreeMeters().then(
+                              (value) => Get.toNamed('/salas/formulario_sala',
+                                  arguments: [
+                                    'Editar Sala',
+                                    false,
+                                    e.idRoom,
+                                    e.idMeter,
+                                    e.codMeter,
+                                    controller.roomCodeController.text =
+                                        e.numRoom.toString()
+                                  ]).then(
+                                (value) =>
+                                    controller.roomCodeController.clear(),
+                              ),
+                            ),
                       );
                     }).toList(),
                   )
                 : ListViewEmpty(
                     faIcon: FontAwesomeIcons.storeAlt,
                     message: 'Não a nenhuma sala cadastrada',
-                    route: () => Get.toNamed('/salas/formulario_sala',
-                            arguments: ['Nova Sala', true])
-                        .then((value) => controller.roomCodeController.clear()),
-                  );
+                    route: () => controller.findFreeMeters().then(
+                          (value) => Get.toNamed('/salas/formulario_sala',
+                                  arguments: ['Nova Sala', true])
+                              .then((value) =>
+                                  controller.roomCodeController.clear()),
+                        ));
           }),
         ],
       ),

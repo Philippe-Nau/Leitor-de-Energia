@@ -49,4 +49,31 @@ class RoomsRepository implements Roomsrepositoryinterface {
       rethrow;
     }
   }
+
+  Future<bool> deleteRoom(int _idRoom) async {
+    try {
+      var response = await http.delete(
+        Uri.parse('$_baseUrl/rooms/$_idRoom'),
+      );
+      return response.statusCode == 201;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<bool> alterRoom(int _idRoom, int _idMeter, String _numRoom) async {
+    try {
+      var response = await http.patch(Uri.parse('$_baseUrl/rooms/$_idRoom'),
+          body: json.encode(
+            {
+              'numRoom': _numRoom,
+              'idMeter': _idMeter,
+            },
+          ),
+          headers: {'Content-Type': 'application/json'});
+      return response.statusCode == 201;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

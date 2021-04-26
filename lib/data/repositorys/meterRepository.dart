@@ -12,7 +12,6 @@ class MeterRepository implements MeterRepositoryinterface {
       final response = await http.get(Uri.parse('$_baseUrl/meters'));
       Map<String, dynamic> jsonDecode;
       if (response.statusCode == 200) jsonDecode = json.decode(response.body);
-      print(jsonDecode);
       return jsonDecode['meters']
           .map<MeterModel>((resp) => MeterModel.fromMap(resp))
           .toList();

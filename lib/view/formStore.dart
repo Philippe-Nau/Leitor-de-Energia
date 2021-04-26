@@ -1,4 +1,3 @@
-import 'package:controle_fornecedores/controller/generalController.dart';
 import 'package:controle_fornecedores/controller/storeController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -6,7 +5,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 class FormStore extends GetView<StoreController> {
-  final GeralController _controller = Get.put(GeralController());
   final dynamic dataArguments = Get.arguments;
   final GlobalKey<FormState> _formKey = GlobalKey();
 
@@ -29,6 +27,7 @@ class FormStore extends GetView<StoreController> {
         child: Form(
           key: _formKey,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TextFormField(
                 controller: controller.storeNameController,
@@ -45,10 +44,37 @@ class FormStore extends GetView<StoreController> {
                     return null;
                 },
               ),
+              !dataArguments[1]
+                  ? Container(
+                      margin: EdgeInsets.only(top: 8),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Sala - ${dataArguments[2]}',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.blue[900],
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 5),
+                          Text(
+                            'Medidor: ${dataArguments[3]}',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.blue[900],
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  : SizedBox(),
               Container(
                 height: 50,
                 alignment: Alignment.centerLeft,
-                margin: EdgeInsets.symmetric(vertical: 20),
+                margin: EdgeInsets.only(top: 20),
                 decoration: BoxDecoration(
                   border: Border(
                     bottom: BorderSide(
@@ -59,9 +85,29 @@ class FormStore extends GetView<StoreController> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      'Vincular Sala',
-                      style: Theme.of(context).accentTextTheme.headline5,
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 20),
+                        child: DropdownButtonFormField(
+                          validator: (value) {
+                            if (value == null)
+                              return 'Este campo é obrigatório';
+                            else
+                              return null;
+                          },
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                          ),
+                          hint: Text('Selecione uma sala disponível'),
+                          onChanged: (value) => controller.selectRoom(value),
+                          items: controller.freeRoomsList
+                              .map((e) => DropdownMenuItem(
+                                    child: Text('Sala - ${e.numRoom}'),
+                                    value: e,
+                                  ))
+                              .toList(),
+                        ),
+                      ),
                     ),
                     IconButton(
                       icon: Container(
@@ -84,33 +130,20 @@ class FormStore extends GetView<StoreController> {
                   ],
                 ),
               ),
-              DropdownButtonFormField(
-                onChanged: (value) => _controller.selectRoom(value),
-                hint: Text('Selecione uma sala disponível'),
-                validator: (value) {
-                  if (value == null)
-                    return 'Este campo é obrigatório';
-                  else
-                    return null;
-                },
-                items: _controller.rooms
-                    .map((value) => DropdownMenuItem(
-                          child: Text(value),
-                          value: value,
-                        ))
-                    .toList(),
-              ),
-              SizedBox(height: 10),
               TextFormField(
                 readOnly: true,
+                controller: controller.codMeterController,
                 decoration: InputDecoration(
                   labelText: 'Medidor',
                 ),
-                initialValue: '11111',
               ),
               Expanded(
                 child: ListView.builder(
-                    itemCount: 2, itemBuilder: (context, index) => null),
+                  itemCount: 2,
+                  itemBuilder: (context, index) => Text(
+                    index.toString(),
+                  ),
+                ),
               ),
             ],
           ),
